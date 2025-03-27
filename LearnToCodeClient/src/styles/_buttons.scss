@@ -1,0 +1,85 @@
+@use './variables' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: 1px solid $color-border;
+  background-color: $color-surface;
+  color: $color-text;
+  box-shadow: $shadow-elevation;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: white;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Primary button
+.button--primary {
+  background-color: $color-primary;
+  color: white;
+  border-color: transparent;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+}
+
+// Danger button
+.button--danger {
+  background-color: $color-danger;
+  color: white;
+  border-color: transparent;
+
+  &:hover {
+    background-color: darken($color-danger, 10%);
+  }
+}
+
+// Dark button (blacker than surface)
+.button--dark {
+  background-color: #0a0a0a;
+  color: $color-text;
+  border: 1px solid $color-border;
+
+  &:hover {
+    background-color: lighten(#0a0a0a, 5%);
+    color: white;
+  }
+}
+
+// Light button (light surface with dark text)
+.button--light {
+  background-color: #f3f3f3;
+  color: #111;
+  border: 1px solid #ccc;
+
+  &:hover {
+    background-color: white;
+    color: $color-primary;
+    border-color: $color-primary;
+  }
+}

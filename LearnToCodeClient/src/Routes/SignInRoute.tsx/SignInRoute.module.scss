@@ -1,0 +1,25 @@
+@import '../../styles/global.scss';
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    
+    div {
+        border: solid 1px $color-border;
+
+        h3 {
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+}
+
