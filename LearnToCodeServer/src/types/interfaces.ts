@@ -8,4 +8,11 @@ export interface BaseResponse {
   export interface ApiResponse<T = undefined> extends BaseResponse {
     data?: T;
   }
+
+  export interface TokenPayload {
+    id: string;
+    email: string;
+    // add any other fields you expect in the payload
+  }
+  
   

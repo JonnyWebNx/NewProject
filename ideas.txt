@@ -1,0 +1,118 @@
+Project Overview
+Objective:
+Create an interactive, AI-driven coding challenge platform that generates a new code puzzle every day. Users will solve the puzzle using the Monaco Editor, submit their solution for evaluation via the Judge0 API, receive feedback (including AI-generated explanations for errors), and track their progress through personal metrics and a global leaderboard.
+
+Key Components
+Daily Puzzle Generation:
+
+Automated Generation:
+
+Use a scheduled task (e.g., with node-cron) to generate a new coding puzzle every day.
+
+Leverage an AI API (like OpenAI’s GPT) to generate the problem statement, correct solution, and a set of test cases.
+
+Storage:
+
+Save each daily puzzle with its test cases and solution for future reference.
+
+User Code Submission and Evaluation:
+
+Monaco Editor Integration:
+
+Users write their code in the Monaco Editor.
+
+Code is extracted programmatically using the editor’s API (e.g., editor.getValue()).
+
+Submission Process:
+
+User-submitted code is sent to the Judge0 API.
+
+The API runs the code against predefined test cases.
+
+Judge0 returns a JSON response with:
+
+Output: Execution results.
+
+Error Messages: Compilation or runtime errors.
+
+Execution Details: Status, time, and memory metrics.
+
+Feedback Mechanism:
+
+If the solution passes all tests, a "proof" of completion is returned.
+
+If there are errors, forward the error messages to ChatGPT to generate an explanation of what went wrong.
+
+Allow users to edit and resubmit their solution based on the feedback.
+
+User Data and Progress Tracking:
+
+Daily Challenge Metrics:
+
+Track the number of consecutive days a user successfully completes the daily challenge.
+
+Store relevant data from each challenge (e.g., submission code, time taken, errors encountered, final output).
+
+Learning Data:
+
+Maintain a record of challenges solved, including feedback and performance metrics, to enable users to review their progress over time.
+
+Leaderboard:
+
+Metrics for Ranking:
+
+Fastest completion time for challenges.
+
+Highest consecutive streak of days with successful challenge completions.
+
+Display:
+
+A leaderboard page to showcase top performers based on these metrics.
+
+Workflow Recap
+Daily Routine:
+
+At a scheduled time, generate a new coding puzzle with test cases and save it.
+
+Display the daily challenge on the user interface.
+
+User Interaction:
+
+User writes and formats their code using the Monaco Editor.
+
+The application extracts the code and sends it to Judge0 along with the required test cases.
+
+Judge0 executes the code and returns results.
+
+Based on the results:
+
+If correct, the user receives a confirmation and proof of completion.
+
+If incorrect, error details are sent to ChatGPT to provide a clear explanation.
+
+The user can then modify their solution and resubmit as needed.
+
+Progress and Leaderboard:
+
+Store each submission and track daily completion metrics.
+
+Update the leaderboard with statistics such as fastest completion time and longest consecutive streak.
+
+Technical Considerations
+Security:
+Ensure safe code execution using sandboxed environments (Judge0) and proper validation to prevent malicious code from affecting the system.
+
+Scalability:
+For low traffic, the current setup is sufficient, but the design should allow for future scalability (e.g., self-hosting Judge0 if needed).
+
+Data Persistence:
+Choose a reliable database to store user data, daily puzzles, and submission history. Consider using an ORM for easier data management.
+
+API Integrations:
+
+Judge0 API: For code execution and result feedback.
+
+ChatGPT API: For error explanation and additional feedback.
+
+Frontend/Backend Communication:
+Use RESTful endpoints or GraphQL to facilitate communication between the Vue.js frontend and the Node.js backend.

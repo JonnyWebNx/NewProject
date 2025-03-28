@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState }from "react";
 import styles from "./Home.module.scss";
 import HeroImage from "../../assets/images/Hero.jpg";
+import CodeEditor from "../../Components/EditorComponents/CodeEditor";
+import { getCodingProblem } from "../../ApiLayer/OpenAi/OpenAi";
+import ProblemDisplay from "../../Components/ProblemDisplay";
+
 
 const HomeRoute = () => {
+  const [codeProblem, setCodeProblem] = useState('');
+
+  const handleGetCodeProblem = async () => {
+    const response = await getCodingProblem();
+    if (response.data) {
+      setCodeProblem(response.data.data)
+    }
+  }
+
+
   return (
     <div className={styles.hero}>
       <h1>Learn React AI</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis sequi
-        natus temporibus mollitia suscipit cum dolor nobis sunt, pariatur sed
-        quam blanditiis nostrum repellat aliquam odit dolorum, dignissimos
-        maiores labore? Eum molestias, in quas consequatur officiis enim quidem
-        repellendus odio culpa corporis, quos corrupti consectetur perferendis
-        dicta debitis necessitatibus deleniti, molestiae repudiandae eligendi
-        voluptatem hic! Voluptatum repellat dolorum ducimus animi.
-      </p>
-      <img src={HeroImage} alt="" />
+      <button onClick={handleGetCodeProblem}>Generate Ai response</button>
+      {codeProblem && (
+        <div className={styles.generatedProblem}>
+          <ProblemDisplay content={codeProblem} />
+        </div>
+      )}     
+      <CodeEditor />
     </div>
   );
 };
